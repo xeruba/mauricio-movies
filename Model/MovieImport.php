@@ -65,7 +65,7 @@ class MovieImport
         /*
          * Prapare the SKU unique key
          * */
-        $sku = "movie[".$movie['id']."]";
+        $sku = "mv-".$movie['id'];
 
 		/* Searches for products based on the SKU as a KEY */
 		$productLoaded = $productFactory->loadByAttribute('sku', $sku);

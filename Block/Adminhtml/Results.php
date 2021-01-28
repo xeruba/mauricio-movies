@@ -83,7 +83,7 @@ class Results extends \Magento\Framework\View\Element\Template
 
     public function getImgSrc($poster_path){
 	    if ($poster_path != null){
-            return 'https://image.tmdb.org/t/p/w500/'.$poster_path;
+            return 'https://image.tmdb.org/t/p/w500'.$poster_path;
         }
 	    return ' ';
     }

@@ -5,7 +5,7 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
-
+use Magento\Framework\Message\ManagerInterface;
 use Mauricio\Movies\Model\MovieImport;
 use Mauricio\Movies\Service\MoviesServiceApi;
 
@@ -34,6 +34,8 @@ class Index extends Action
 
 	protected $_movieImport;
 
+	protected $_messageManager;
+
     /**
      * Index constructor.
      * @param Context $context
@@ -46,13 +48,15 @@ class Index extends Action
 		PageFactory $resultPageFactory,
         MoviesServiceApi $api,
         \Magento\Framework\Registry $registry,
-        MovieImport $movieImport
+        MovieImport $movieImport,
+        ManagerInterface $messageManager
 	) {
 		parent::__construct($context);
         $this->api = $api;
         $this->_registry = $registry;
 		$this->resultPageFactory = $resultPageFactory;
 		$this->_movieImport = $movieImport;
+        $this->_messageManager = $messageManager;
 	}
 
     /**
@@ -75,8 +79,16 @@ class Index extends Action
          * The param array 'products' represents the movies that must be imported
          */
 	    if($products = $this->getRequest()->getParam('products')){
+	        $qtn_import = 0;
             foreach ($products as $product){
-                $this->_movieImport->import($product);
+                if($this->_movieImport->import($product)){
+                    $qtn_import++;
+                }
+            }
+            if ($qtn_import > 0){
+                $this->_messageManager->addSuccessMessage("Movies saved!");
+            }else{
+                $this->_messageManager->addErrorMessage("Movies not imported.");
             }
         }
 
