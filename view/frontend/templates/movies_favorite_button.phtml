@@ -1,0 +1,6 @@
+<form id="favorite-movie" method="post" action="<?= $block->getUrl('movies/favorite/create/') ?>">
+    <input type="hidden" name="product_id" value="<?= $block->getProductId() ?>">
+    <input type="hidden" name="go_back_url" value="<?= $block->getCurrentUrl() ?>">
+
+    <button class="action tofavorite" type="submit">Add to Favorite</button>
+</form>

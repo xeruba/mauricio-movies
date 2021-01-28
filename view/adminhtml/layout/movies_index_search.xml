@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<referenceBlock name="page.title">
+		<action method="setPageTitle">
+			<argument name="title" xsi:type="string">
+				Search Movie
+			</argument>
+		</action>
+	</referenceBlock>
+    <head>
+        <link src="Mauricio_Movies::js/movie-search.js"/>
+        <link src="Mauricio_Movies::js/pagination.js"/>
+    </head>
+	<body>
+		<referenceContainer name="content">
+			<block class="Mauricio\Movies\Block\Adminhtml\Index" name="Movies_Index" template="Mauricio_Movies::index.phtml">
+                <block class="Mauricio\Movies\Block\Adminhtml\Search" name="Movies_Search" template="Mauricio_Movies::index/search.phtml"/>
+                <block class="Mauricio\Movies\Block\Adminhtml\Results" name="Movies_Results" template="Mauricio_Movies::index/results.phtml"/>
+            </block>
+		</referenceContainer>
+	</body>
+</page>

@@ -1,0 +1,5 @@
+<form method="post" id="form_movies" action="<?php echo $block->getUrl('movies/index/index/'); ?>">
+    <input name="form_key" type="hidden" value="<?php echo $block->getFormKey();?>">
+    <?php echo $this->getChildHtml('Movies_Search'); ?>
+    <?php echo $this->getChildHtml('Movies_Results'); ?>
+</form>

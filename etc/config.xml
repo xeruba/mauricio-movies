@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <movies>
+            <general>
+                <enable>0</enable>
+                <api_key>47c255fd603fb980e86d65f45ce3811f</api_key>
+                <price>20</price>
+                <stock>50</stock>
+            </general>
+        </movies>
+    </default>
+</config>

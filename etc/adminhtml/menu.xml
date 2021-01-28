@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Mauricio_Movies::movies"
+			 title="Mauricio Movies"
+			 translate="title"
+			 module="Mauricio_Movies"
+			 parent="Magento_Catalog::catalog"
+			 sortOrder="50"
+			 dependsOnModule="Mauricio_Movies"
+			 resource="Mauricio_Movies::movies" />
+
+		<add id="Mauricio_Movies::movies_index"
+			 title="Index"
+			 translate="title"
+			 module="Mauricio_Movies"
+			 parent="Mauricio_Movies::movies"
+			 sortOrder="15"
+			 dependsOnModule="Mauricio_Movies"
+			 action="movies/index"
+			 resource="Mauricio_Movies::movies_index" />
+
+        <add id="Mauricio_Movies::movies_favorite"
+			 title="Top 10 Favorite Movies"
+			 translate="title"
+			 module="Mauricio_Movies"
+			 parent="Mauricio_Movies::movies"
+			 sortOrder="16"
+			 dependsOnModule="Mauricio_Movies"
+			 action="movies/favorite"
+			 resource="Mauricio_Movies::movies_favorite" />
+
+		<add id="Mauricio_Movies::configuration"
+             title="Configuration"
+			 translate="title"
+             module="Mauricio_Movies"
+             parent="Mauricio_Movies::movies"
+             sortOrder="20"
+			 dependsOnModule="Mauricio_Movies"
+             action="adminhtml/system_config/edit/section/movies"
+             resource="Mauricio_Movies::configuration" />
+	</menu>
+</config>

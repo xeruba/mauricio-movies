@@ -1,0 +1,40 @@
+<div id="pagination" class="pagination" data-last_page="<?php echo $block->getMoviesTotalPages(); ?>" style="display: inline-flex">
+    <button id="btn_prev" class="btn_search_movies"><</button>
+    <div id="inner_pages">
+
+    </div>
+    <button id="btn_next" class="btn_search_movies">></button>
+</div>
+<?php if($block->getMovies()): ?>
+<table class="data table table-movies">
+    <tr>
+        <th>#</th>
+        <th class="movie-id">Id</th>
+        <th class="movie-name">Name</th>
+        <th class="movie-name">Price</th>
+        <th class="movie-name">Stock</th>
+        <th class="movie-name">Select</th>
+    </tr>
+    <?php foreach ($block->getMovies() as $key => $movie) : ?>
+        <tr>
+            <td>
+                <img src="<?= $block->getImgSrc($movie['poster_path']) ?>">
+            </td>
+            <td><?= $movie['id'] ?></td>
+            <td><?= $movie['original_title'] ?></td>
+            <td>
+                <input class="input_movies"  name="products[<?= $movie['id'] ?>][price]" type="number" min="1" step="0.1" value="<?= $block->getDefaultPrice()  ?>">
+            <td>
+                <input class="input_movies"  name="products[<?= $movie['id'] ?>][stock]" type="number" min="0" step="1" value="<?= $block->getDefaultStock()  ?>">
+            </td>
+            <td>
+                <input class="input_movies checkbox_movies"  name="products[<?= $movie['id'] ?>][check]" type="checkbox">
+            </td>
+        </tr>
+        <input class="input_movies" type="hidden" name="products[<?= $movie['id'] ?>][id]" value="<?= $movie['id'] ?>">
+        <input class="input_movies" type="hidden" name="products[<?= $movie['id'] ?>][title]" value="<?= $movie['original_title'] ?>">
+    <input class="input_movies" type="hidden" name="products[<?= $movie['id'] ?>][overview]" value="<?= $movie['overview'] ?>">
+        <input class="input_movies" type="hidden" name="products[<?= $movie['id'] ?>][img]" value="<?= $block->getImgSrc($movie['poster_path']) ?>">
+    <?php endforeach; ?>
+</table>
+<?php endif; ?>
