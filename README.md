@@ -22,8 +22,14 @@
 
 ## Screeshots
 1. Custom admin navigation bar
-![image](https://drive.google.com/file/d/1FycCycBmE7yvRiu4tUryjBOZMDnn4mwH/view?usp=sharing)
+![image](https://lh3.googleusercontent.com/JTFUW3WxUTbTzB7G4ibQsF1lboHjguBVE9TRv9m4MWjD2srSeqYpqhnXdIFx1TBBpQhYnYfQhGz8yQ=w1920-h1008-rw)
 1. Module configurations
-![image](https://lh5.googleusercontent.com/75pQtKhsieqrqJXk7Kknf4o92240ZLU2igjzmaxyRmAWXH-omMMEP9CDpKD6LMU9noMajFOM7c7rtw=w1920-h1008-rw)
+![image](https://lh4.googleusercontent.com/hGIrchov0e2tp2fKTilxZIbzEYtNxdN6JGT-9Sm8SmsoFm1D7wkTT49ivmA5O44W5XguCT04Yw7rPA=w1920-h1008-rw)
 1. Page to import movies
 ![image](https://lh6.googleusercontent.com/q3Dc3xfYescvewtt6sn89uIaME8u7DzlZWvkZBs357kp9THCpaZ0fjpjIviW-8JnnR8BrF9sjmSrVw=w1920-h1008-rw)
+1. Showing movies
+![image](https://lh4.googleusercontent.com/nkISYuCoSyi5EtciM9NbOJOger7c9xgbfesU6lCVuUxYkjDZf-cNGdnu6SOt8ofcX6gcR1wZIR_l3A=w1920-h1008-rw)
+1. _Add Favorite button_ on the product page
+![image](https://lh3.googleusercontent.com/JQzZ9ctPgC6yCNUVQMw5AWRsujyAviBzUgH4aycNQvILPGBfRV7ex1kHlZAwAY0llbtyeo6NYmgGwQ=w1920-h1008-rw)
+1. _Top 10 Favorite Movies_ page
+![image](https://lh5.googleusercontent.com/PTu7aYYdZtigcbkiaOu__o1RhZ8CyB3n7LS-i9_Gu7vand4VPcyeODAFJRLKHl-pBHjd_EvVLNuudw=w1920-h1008-rw)
