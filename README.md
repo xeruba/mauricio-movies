@@ -27,17 +27,19 @@
 
 ## Screenshots
 #### Custom admin navigation bar  <br /> 
-![Custom admin navigation bar](https://lh4.googleusercontent.com/kQ3ZYIMOvH3bG5AOMKhgKlZQuHSt8trBRVo71HHKU1i4TOqBSPhCh1kuAc9QqXhGxJF4caHWzEhm5w=w1920-h1008-rw) <br /> 
+![Custom admin navigation bar](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/01_side_menu.png?raw=true) <br /> 
 
 #### Module configurations  <br />
-![Module configurations](https://lh4.googleusercontent.com/hGIrchov0e2tp2fKTilxZIbzEYtNxdN6JGT-9Sm8SmsoFm1D7wkTT49ivmA5O44W5XguCT04Yw7rPA=w1920-h1008-rw) <br /> 
+![Module configurations](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/02_configuration_module.png?raw=true) <br /> 
+
 #### Page to import movies  <br />
-![Page to import movies](https://lh4.googleusercontent.com/YaHcl4czORbpDK3fwJTUWe-3YPUkfyoqjQXNxFvVfeYkSH13lnc0vOAUh4MpcVW53-2AADXqKILjmQ=w1920-h1008-rw) <br /> 
+![Page to import movies](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/03_index_import_movies.png?raw=true) <br /> 
+
 #### Showing movies  <br />
-![Showing movies](https://lh6.googleusercontent.com/8m9FwO9uh6uk34-vKSl8OedVPcA5ReXw_qePvwdIk6W9TCgG6S8kBWuZZ_Yhw9mR0kL6hCXKLt-OcQ=w1920-h1008-rw) <br />
+![Showing movies](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/04_list_products.png?raw=true) <br />
 
 #### _Add Favorite button_ on the product page  <br />
-![_Add Favorite button_ on the product page](https://lh3.googleusercontent.com/JQzZ9ctPgC6yCNUVQMw5AWRsujyAviBzUgH4aycNQvILPGBfRV7ex1kHlZAwAY0llbtyeo6NYmgGwQ=w1920-h1008-rw) <br /> 
+![_Add Favorite button_ on the product page](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/05_view_product.png?raw=true) <br /> 
 
 #### _Top 10 Favorite Movies_ page  <br />
-![_Top 10 Favorite Movies_ page](https://lh5.googleusercontent.com/PTu7aYYdZtigcbkiaOu__o1RhZ8CyB3n7LS-i9_Gu7vand4VPcyeODAFJRLKHl-pBHjd_EvVLNuudw=w1920-h1008-rw) <br /> 
+![_Top 10 Favorite Movies_ page](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/06_admin_top_10_favorite.png?raw=true) <br /> 
