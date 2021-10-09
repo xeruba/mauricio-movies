@@ -2,7 +2,7 @@
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Mauricio_Movies::css/movies_favorite_button.css" />
+        <css src="Mauricio_Movies::css/movies_favorite_button.css"/>
     </head>
     <referenceBlock name="product.info.addto">
         <block class="Mauricio\Movies\Block\Favorite" template="Mauricio_Movies::movies_favorite_button.phtml"/>

@@ -1,23 +1,24 @@
 <?php
+
 namespace Mauricio\Movies\Model\ResourceModel\Favorite;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection
 {
-	protected $_idFieldName = 'entity_id';
-	protected $_eventPrefix = 'mauricio_movies_favorite_collection';
-	protected $_eventObject = 'mauricio_movies_favorite_collection';
+    protected $_idFieldName = 'entity_id';
+    protected $_eventPrefix = 'mauricio_movies_favorite_collection';
+    protected $_eventObject = 'mauricio_movies_favorite_collection';
 
-	/**
-	 * Define resource model
-	 *
-	 * @return void
-	 */
-	protected function _construct()
-	{
-		$this->_init('Mauricio\Movies\Model\Favorite', 'Mauricio\Movies\Model\ResourceModel\Favorite');
-	}
+    /**
+     * Define resource model
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init('Mauricio\Movies\Model\Favorite', 'Mauricio\Movies\Model\ResourceModel\Favorite');
+    }
 
     /**
      * @return Collection|void

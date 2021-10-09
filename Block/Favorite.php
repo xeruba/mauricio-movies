@@ -1,6 +1,9 @@
 <?php
+
 namespace Mauricio\Movies\Block;
 
+use Magento\Catalog\Model\Product;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Catalog\Helper\Data;
@@ -40,12 +43,12 @@ class Favorite extends Template
      * @param StoreManagerInterface $storeManager
      * @param Session $customerSession
      */
-    public function __construct(Context $context,
-                                Data $helper,
-                                StoreManagerInterface $storeManager,
-                                Session $customerSession
-    )
-    {
+    public function __construct(
+        Context $context,
+        Data $helper,
+        StoreManagerInterface $storeManager,
+        Session $customerSession
+    ) {
         $this->_helper = $helper;
         $this->_storeManager = $storeManager;
         $this->_customerSession = $customerSession;
@@ -53,11 +56,11 @@ class Favorite extends Template
     }
 
     /**
-     * @return \Magento\Catalog\Model\Product|null
+     * @return Product|null
      */
     public function getProduct()
     {
-        if(is_null($this->_product)){
+        if (is_null($this->_product)) {
             $this->_product = $this->_helper->getProduct();
         }
         return $this->_product;
@@ -67,16 +70,18 @@ class Favorite extends Template
      * @return int
      * Return the id of the current product
      */
-    public function getProductId(){
+    public function getProductId()
+    {
         return $this->getProduct()->getId();
     }
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      * Return the URL to the current page
      */
-    public function getCurrentUrl() {
+    public function getCurrentUrl()
+    {
         return $this->_storeManager->getStore()->getCurrentUrl();
     }
 
@@ -84,7 +89,8 @@ class Favorite extends Template
      * @return int|null
      * Return the id of the logged in customer
      */
-    public function getLoggedCustomerId(){
+    public function getLoggedCustomerId()
+    {
         return $this->_customerSession->getId();
     }
 
@@ -92,7 +98,8 @@ class Favorite extends Template
      * @return bool
      * Checks that a customer is logged in
      */
-    public function hasLoggedCustomer(){
+    public function hasLoggedCustomer()
+    {
         return $this->_customerSession->isLoggedIn();
     }
 

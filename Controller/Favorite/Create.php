@@ -1,67 +1,84 @@
 <?php
+
 namespace Mauricio\Movies\Controller\Favorite;
 
+use Exception;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\View\Result\PageFactory;
 use Mauricio\Movies\Model\FavoriteFactory;
 use Mauricio\Movies\Model\ResourceModel\Favorite\CollectionFactory as FavoriteCollectionFactory;
 use Magento\Customer\Model\Session;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Controller\ResultFactory;
 
-
-class Create extends \Magento\Framework\App\Action\Action
+class Create extends Action
 {
+    /**
+     * @var PageFactory
+     */
+    protected $_pageFactory;
 
-	protected $_pageFactory;
+    /**
+     * @var FavoriteFactory
+     */
+    protected $_favoriteFactory;
 
-	protected $_favoriteFactory;
+    /**
+     * @var Session
+     */
+    protected $_customerSession;
 
-	protected $_customerSession;
+    /**
+     * @var ManagerInterface
+     */
+    protected $_messageManager;
 
-	protected $_messageManager;
-
-	protected $_favoriteCollectionFactory;
+    /**
+     * @var FavoriteCollectionFactory
+     */
+    protected $_favoriteCollectionFactory;
 
     /**
      * Create constructor.
-     * @param \Magento\Framework\App\Action\Context $context
-     * @param \Magento\Framework\View\Result\PageFactory $pageFactory
+     * @param Context $context
+     * @param PageFactory $pageFactory
      * @param FavoriteFactory $favoriteFactory
      * @param Session $customerSession
      * @param ManagerInterface $messageManager
      * @param FavoriteCollectionFactory $favoriteCollectionFactory
      */
-	public function __construct(
-		\Magento\Framework\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $pageFactory,
+    public function __construct(
+        Context $context,
+        PageFactory $pageFactory,
         FavoriteFactory $favoriteFactory,
         Session $customerSession,
         ManagerInterface $messageManager,
         FavoriteCollectionFactory $favoriteCollectionFactory
-		)
-	{
-		$this->_pageFactory = $pageFactory;
-		$this->_favoriteFactory = $favoriteFactory;
-		$this->_customerSession = $customerSession;
-		$this->_messageManager = $messageManager;
-		$this->_favoriteCollectionFactory = $favoriteCollectionFactory;
-		return parent::__construct($context);
-	}
+    ) {
+        $this->_pageFactory = $pageFactory;
+        $this->_favoriteFactory = $favoriteFactory;
+        $this->_customerSession = $customerSession;
+        $this->_messageManager = $messageManager;
+        $this->_favoriteCollectionFactory = $favoriteCollectionFactory;
+        return parent::__construct($context);
+    }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @return ResponseInterface|ResultInterface
      * Used to insert a new register on the table mauricio_movies_favorites
      */
-	public function execute()
-	{
-	    /*
-	     * Verify that a user is authenticated
-	     * */
-        if(!$this->_customerSession->isLoggedIn()){
-             $this->_messageManager->addErrorMessage('You have to be logged in to favorite a movie!');
-        }else{
+    public function execute()
+    {
+        /* Verify that a user is authenticated */
+        if (!$this->_customerSession->isLoggedIn()) {
+            $this->_messageManager->addErrorMessage('You have to be logged in to favorite a movie!');
+        } else {
             $customer_id = $this->_customerSession->getCustomerId();
             $product_id = $this->getRequest()->getParam('product_id');
-
 
             try {
                 $favorite = $this->_favoriteFactory->create();
@@ -69,12 +86,12 @@ class Create extends \Magento\Framework\App\Action\Action
                 $favorite->setProductId($product_id);
                 $favorite->save();
                 $this->_messageManager->addSuccessMessage("Favorite movie saved!");
-            } catch (\Magento\Framework\Exception\AlreadyExistsException $e){
+            } catch (AlreadyExistsException $e) {
                 /*
                  * Handle the already a favorited movies exception
                  * */
                 $this->_messageManager->addSuccessMessage('This film was already one of your favorites.');
-            } catch (\Exception $e){
+            } catch (Exception $e) {
                 /*
                  * A Catch clause to handle all the other exceptions
                  * */
@@ -82,9 +99,9 @@ class Create extends \Magento\Framework\App\Action\Action
             }
         }
 
-	    $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setUrl($this->_redirect->getRefererUrl());
         return $resultRedirect;
-	}
+    }
 
 }

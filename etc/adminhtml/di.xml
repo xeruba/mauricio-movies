@@ -1,0 +1,21 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Admin grid -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="favorite_listing_data_source" xsi:type="string">
+                    Mauricio\Movies\Model\ResourceModel\Favorite\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mauricio\Movies\Model\ResourceModel\Favorite\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mauricio_movies_favorites</argument>
+            <argument name="eventPrefix" xsi:type="string">mauricio_movies_favorites</argument>
+            <argument name="eventObject" xsi:type="string">mauricio_movies_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Mauricio\Movies\Model\ResourceModel\Favorite</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,7 +1,10 @@
 <?php
+
 namespace Mauricio\Movies\Controller\Adminhtml\Favorite;
 
 use Magento\Backend\App\Action;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Backend\App\Action\Context;
@@ -18,9 +21,9 @@ class Index extends Action
     const ACTION_RESOURCE = 'Mauricio_Movies::movies_favorite';
 
     /**
-     * @var
+     * @var PageFactory
      */
-	protected $resultPageFactory;
+    protected $resultPageFactory;
 
     /**
      * Index constructor.
@@ -28,24 +31,24 @@ class Index extends Action
      * @param PageFactory $resultPageFactory
      */
     public function __construct(
-		Context $context,
-		PageFactory $resultPageFactory
-	) {
-		parent::__construct($context);
-		$this->resultPageFactory = $resultPageFactory;
-	}
+        Context $context,
+        PageFactory $resultPageFactory
+    ) {
+        parent::__construct($context);
+        $this->resultPageFactory = $resultPageFactory;
+    }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page
+     * @return ResponseInterface|ResultInterface|Page
      * Presents the index top 10 most favorites movies
      */
-	public function execute()
-	{
-		$resultPage = $this->resultPageFactory->create();
-		$resultPage->setActiveMenu(static::ACTION_RESOURCE);
-		$resultPage->getConfig()->getTitle()->prepend(__('Favorite'));
+    public function execute()
+    {
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu(static::ACTION_RESOURCE);
+        $resultPage->getConfig()->getTitle()->prepend(__('Favorite'));
 
-		return $resultPage;
-	}
+        return $resultPage;
+    }
 
 }

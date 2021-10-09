@@ -15,25 +15,25 @@ class ImportImageService
     /**
      * @var DirectoryList
      */
-	protected $directoryList;
+    protected $directoryList;
 
     /**
      * @var File
      */
-	protected $file;
+    protected $file;
 
     /**
      * ImportImageService constructor.
      * @param DirectoryList $directoryList
      * @param File $file
      */
-	public function __construct(
-		DirectoryList $directoryList,
-		File $file
-	) {
-		$this->directoryList = $directoryList;
-		$this->file = $file;
-	}
+    public function __construct(
+        DirectoryList $directoryList,
+        File $file
+    ) {
+        $this->directoryList = $directoryList;
+        $this->file = $file;
+    }
 
     /**
      * @param $product
@@ -43,25 +43,25 @@ class ImportImageService
      * @return bool|string
      * @throws \Exception
      */
-	public function execute($product, $imageUrl, $visible = false, $imageType = [])
-	{
-		$tmpDir = $this->getMediaDirTmpDir();
-		$this->file->checkAndCreateFolder($tmpDir);
-		$newFileName = $tmpDir . baseName($imageUrl);
-		$result = $this->file->read($imageUrl, $newFileName);
-		if ($result) {
-			$product->addImageToMediaGallery($newFileName, $imageType, true, $visible);
-		}
+    public function execute($product, $imageUrl, $visible = false, $imageType = [])
+    {
+        $tmpDir = $this->getMediaDirTmpDir();
+        $this->file->checkAndCreateFolder($tmpDir);
+        $newFileName = $tmpDir . baseName($imageUrl);
+        $result = $this->file->read($imageUrl, $newFileName);
+        if ($result) {
+            $product->addImageToMediaGallery($newFileName, $imageType, true, $visible);
+        }
 
-		return $result;
-	}
+        return $result;
+    }
 
     /**
      * @return string
      * @throws \Magento\Framework\Exception\FileSystemException
      */
-	protected function getMediaDirTmpDir()
-	{
-		return $this->directoryList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR;
-	}
+    protected function getMediaDirTmpDir()
+    {
+        return $this->directoryList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR;
+    }
 }
