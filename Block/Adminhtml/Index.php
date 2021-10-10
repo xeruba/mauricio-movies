@@ -1,16 +1,22 @@
 <?php
+
 namespace Mauricio\Movies\Block\Adminhtml;
 
+use Magento\Framework\Data\Form\FormKey;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
 use Mauricio\Movies\Service\MoviesServiceApi;
 
 /**
  * Class Index
  * @package Mauricio\Movies\Block\Adminhtml
  */
-class Index extends \Magento\Framework\View\Element\Template
+class Index extends Template
 {
     /**
-     * @var \Magento\Framework\Data\Form\FormKey
+     * @var FormKey
      */
     protected $formKey;
 
@@ -21,27 +27,27 @@ class Index extends \Magento\Framework\View\Element\Template
 
     /**
      * Index constructor.
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Framework\Data\Form\FormKey $formKey
+     * @param Context $context
+     * @param FormKey $formKey
      * @param MoviesServiceApi $api
      */
-	public function __construct(
-	    \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Framework\Data\Form\FormKey $formKey,
-        \Magento\Framework\Registry $registry
-        )
-	{
-		parent::__construct($context);
+    public function __construct(
+        Context $context,
+        FormKey $formKey,
+        Registry $registry
+    ) {
+        parent::__construct($context);
         $this->formKey = $formKey;
         $this->_registry = $registry;
-	}
+    }
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      * Return the formKey
      */
-	public function getFormKey(){
-	    return $this->formKey->getFormKey();
+    public function getFormKey()
+    {
+        return $this->formKey->getFormKey();
     }
 }

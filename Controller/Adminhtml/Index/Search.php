@@ -1,4 +1,5 @@
 <?php
+
 namespace Mauricio\Movies\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
@@ -16,6 +17,7 @@ use Mauricio\Movies\Service\MoviesServiceApi;
 class Search extends Action implements HttpGetActionInterface
 {
     const ACTION_RESOURCE = 'Mauricio_Movies::movies_index';
+
     /**
      * @var MoviesServiceApi
      */
@@ -24,66 +26,60 @@ class Search extends Action implements HttpGetActionInterface
     /**
      * @var PageFactory
      */
-	protected $resultPageFactory;
+    protected $resultPageFactory;
 
-	/**
+    /**
      * @var \Magento\Framework\Registry
      */
-	protected $_registry;
+    protected $_registry;
 
     /**
      * Index constructor.
      * @param Context $context
      * @param PageFactory $resultPageFactory
      */
-	public function __construct(
-		Context $context,
-		PageFactory $resultPageFactory,
+    public function __construct(
+        Context $context,
+        PageFactory $resultPageFactory,
         MoviesServiceApi $api,
         \Magento\Framework\Registry $registry
-	) {
-		parent::__construct($context);
-		$this->resultPageFactory = $resultPageFactory;
+    ) {
+        parent::__construct($context);
+        $this->resultPageFactory = $resultPageFactory;
         $this->api = $api;
         $this->_registry = $registry;
-	}
+    }
 
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|Page
      */
-	public function execute()
-	{
+    public function execute()
+    {
         /**
          * Pegar informaçoes da busca
          * acessar model api e reaizar busca
          * salvar no o response no registry
          */
-
-        /*if($this->getRequest()->getParams()){
-
-        }
-        die;*/
         $title_search = $this->getRequest()->getParam('title');
         $page = $this->getRequest()->getParam('page');
         $movies = $this->api->call($title_search, $page);
         $this->setResponseVariable('movies_response', $movies);
         $this->setResponseVariable('title_search', $title_search);
 
-		$resultPage = $this->resultPageFactory->create();
-		$resultPage->setActiveMenu(static::ACTION_RESOURCE);
-		$resultPage->getConfig()->getTitle()->prepend(__('Index'));
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->setActiveMenu(static::ACTION_RESOURCE);
+        $resultPage->getConfig()->getTitle()->prepend(__('Index'));
 
         return $resultPage;
-	}
+    }
 
     /**
      * Save custom variable in registry
      * @param $name
      * @param $value
      */
-	public function setResponseVariable($name, $value)
+    public function setResponseVariable($name, $value)
     {
-         $this->_registry->register($name, $value);
+        $this->_registry->register($name, $value);
     }
-
 }

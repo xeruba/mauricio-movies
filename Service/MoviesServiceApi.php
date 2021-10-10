@@ -1,4 +1,5 @@
 <?php
+
 namespace Mauricio\Movies\Service;
 
 use Magento\Framework\HTTP\Client\Curl;
@@ -17,6 +18,7 @@ class MoviesServiceApi
      * @var
      */
     protected $response = null;
+
     /**
      * @var Curl
      */
@@ -33,33 +35,41 @@ class MoviesServiceApi
      * @param UrlInterface $backendUrl
      * @param Data $helperData
      */
-    public function __construct(Curl $curl, Cache $cache, UrlInterface $backendUrl, Data $helperData)
-    {
+    public function __construct(
+        Curl $curl,
+        Cache $cache,
+        UrlInterface $backendUrl,
+        Data $helperData
+    ) {
         $this->curlClient = $curl;
         $this->_helperData = $helperData;
-
     }
 
     /**
      * @param $title
+     * @param $page
      * @return string
      */
     public function getApiUrl($title, $page): string
     {
-        return str_replace (
-            ' ',
-            '%20',
-            'https://api.themoviedb.org/3/search/movie?api_key='.$this->_helperData->getGeneralConfig('api_key').'&language=en-US&query='.$title.'&page='.$page.'&include_adult=false'
-        );
+        $params = [
+            'api_key' =>  $this->_helperData->getGeneralConfig('api_key'),
+            'language' => 'en-US',
+            'query' => str_replace(' ', '%20', $title),
+            'page' => $page,
+            'include_adult' => false
+        ];
+
+        return 'https://api.themoviedb.org/3/search/movie?' . http_build_query($params);
     }
 
     /**
      * @param $title
-     * @return array
+     * @param $page
+     * @return array|mixed|void
      */
     public function call($title, $page)
     {
-
         try {
             $this->getCurlClient()->get($this->getApiUrl($title, $page));
 
@@ -82,7 +92,8 @@ class MoviesServiceApi
         return $this->curlClient;
     }
 
-    public function getResponse(){
+    public function getResponse()
+    {
         return $this->response;
     }
 }
