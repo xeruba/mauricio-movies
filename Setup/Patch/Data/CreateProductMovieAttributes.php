@@ -1,28 +1,28 @@
 <?php
 
-namespace Mauricio\Movies\Setup;
+namespace Mauricio\Movies\Setup\Patch\Data;
 
-use Magento\Catalog\Model\Product;
-use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
-use Magento\Framework\Setup\InstallDataInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Catalog\Setup\CategorySetupFactory;
-use Magento\Eav\Model\Entity\Attribute\SetFactory as AttributeSetFactory;
 use Magento\Eav\Setup\EavSetup;
+use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
+use Magento\Eav\Model\Entity\Attribute\SetFactory as AttributeSetFactory;
+use Magento\Catalog\Setup\CategorySetupFactory;
+use Magento\Catalog\Model\Product;
 
-class InstallData implements InstallDataInterface
+class CreateProductMovieAttributes implements DataPatchInterface, PatchRevertableInterface
 {
+    /**
+     * @var ModuleDataSetupInterface
+     */
+    private $moduleDataSetup;
+
     /**
      * @var EavSetupFactory
      */
     private $eavSetupFactory;
-
-    /**
-     * @var AttributeSetFactory
-     */
-    private $attributeSetFactory;
 
     /**
      * @var CategorySetupFactory
@@ -30,28 +30,40 @@ class InstallData implements InstallDataInterface
     private $categorySetupFactory;
 
     /**
-     * InstallData constructor.
+     * @var AttributeSetFactory
+     */
+    private $attributeSetFactory;
+
+    /**
+     * @param ModuleDataSetupInterface $moduleDataSetup
      * @param EavSetupFactory $eavSetupFactory
      * @param CategorySetupFactory $categorySetupFactory
+     * @param AttributeSetFactory $attributeSetFactory
      */
     public function __construct(
+        ModuleDataSetupInterface $moduleDataSetup,
         EavSetupFactory $eavSetupFactory,
-        AttributeSetFactory $attributeSetFactory,
-        CategorySetupFactory $categorySetupFactory
+        CategorySetupFactory $categorySetupFactory,
+        AttributeSetFactory $attributeSetFactory
     ) {
+        $this->moduleDataSetup = $moduleDataSetup;
         $this->eavSetupFactory = $eavSetupFactory;
-        $this->attributeSetFactory = $attributeSetFactory;
         $this->categorySetupFactory = $categorySetupFactory;
+        $this->attributeSetFactory = $attributeSetFactory;
     }
 
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    /**
+     * {@inheritdoc}
+     */
+    public function apply()
     {
+        $this->moduleDataSetup->getConnection()->startSetup();
         /*
         * New attribute set for the movies
         */
-        $categorySetup = $this->categorySetupFactory->create(['setup' => $setup]);
+        $categorySetup = $this->categorySetupFactory->create(['setup' => $this->moduleDataSetup]);
 
-        $attributeSet = $this->attributeSetFactory->create();
+        $attributeSet = $this->attributeSetFactory->create(['setup' => $this->moduleDataSetup]);
         $entityTypeId = $categorySetup->getEntityTypeId(Product::ENTITY);
         $attributeSetId = $categorySetup->getDefaultAttributeSetId($entityTypeId);
         $data = [
@@ -65,11 +77,8 @@ class InstallData implements InstallDataInterface
         $attributeSet->initFromSkeleton($attributeSetId);
         $attributeSet->save();
 
-        /*
-        * Attribute used to represents that a product is a movie, for the new attribute_set
-        */
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-
+        /** @var EavSetup $eavSetup */
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->addAttribute(
             Product::ENTITY,
             'is_movie',
@@ -96,5 +105,34 @@ class InstallData implements InstallDataInterface
                 'attribute_set_id' => $attributeSet->getId(),
             ]
         );
+
+        $this->moduleDataSetup->getConnection()->endSetup();
+    }
+
+    public function revert()
+    {
+        /** @var EavSetup $eavSetup */
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
+        $eavSetup->removeAttribute(Product::ENTITY, 'is_movie');
+
+        $this->moduleDataSetup->getConnection()->endSetup();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAliases()
+    {
+        return [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getDependencies()
+    {
+        return [
+
+        ];
     }
 }
