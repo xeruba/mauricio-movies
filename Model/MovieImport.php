@@ -5,6 +5,7 @@ namespace Mauricio\Movies\Model;
 use Exception;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\ProductFactory;
+use Magento\Catalog\Model\ProductRepository;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Model\Store;
@@ -33,19 +34,26 @@ class MovieImport
     protected $_imageService;
 
     /**
-     * MovieImport constructor.
+     * @var ProductRepository
+     */
+    private $_productRepository;
+
+    /**
      * @param ProductFactory $productFactory
+     * @param ProductRepository $productRepository
      * @param DateTime $dateTime
      * @param StoreManagerInterface $storeManager
      * @param ImportImageService $imageService
      */
     public function __construct(
         ProductFactory $productFactory,
+        ProductRepository $productRepository,
         DateTime $dateTime,
         StoreManagerInterface $storeManager,
         ImportImageService $imageService
     ) {
         $this->_productFactory = $productFactory;
+        $this->_productRepository = $productRepository;
         $this->_dateTime = $dateTime;
         $this->_storeManager = $storeManager;
         $this->_imageService = $imageService;
@@ -119,7 +127,7 @@ class MovieImport
             ['image', 'small_image', 'thumbnail']);
 
         try {
-            $product->save();
+            $this->_productRepository->save($product);
         } catch (Exception $e) {
             return false;
         }
