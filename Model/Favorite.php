@@ -1,27 +1,29 @@
 <?php
+
 namespace Mauricio\Movies\Model;
+
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Api\ExtensibleDataInterface;
 
 class Favorite extends AbstractModel implements ExtensibleDataInterface
 {
-	const CACHE_TAG = 'mauricio_movies_favorites';
+    const CACHE_TAG = 'mauricio_movies_favorites';
 
-	protected $_cacheTag = 'mauricio_movies_favorites';
+    protected $_cacheTag = 'mauricio_movies_favorites';
 
-	protected $_eventPrefix = 'mauricio_movies_favorites';
+    protected $_eventPrefix = 'mauricio_movies_favorites';
 
-	protected function _construct()
-	{
-		$this->_init('Mauricio\Movies\Model\ResourceModel\Favorite');
-	}
+    protected function _construct()
+    {
+        $this->_init('Mauricio\Movies\Model\ResourceModel\Favorite');
+    }
 
     /**
      * @return int
      */
-	public function getEntityId()
+    public function getEntityId()
     {
-        return (int) $this->getData('entity_id');
+        return (int)$this->getData('entity_id');
     }
 
     /**
@@ -39,7 +41,7 @@ class Favorite extends AbstractModel implements ExtensibleDataInterface
      */
     public function getProductId()
     {
-        return (int) $this->getData('product_id');
+        return (int)$this->getData('product_id');
     }
 
     /**
@@ -58,7 +60,7 @@ class Favorite extends AbstractModel implements ExtensibleDataInterface
      */
     public function getCustomerId()
     {
-        return (int) $this->getData('customer_id');
+        return (int)$this->getData('customer_id');
     }
 
     /**
@@ -70,5 +72,4 @@ class Favorite extends AbstractModel implements ExtensibleDataInterface
     {
         return $this->setData('customer_id', $customerId);
     }
-
 }

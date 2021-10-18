@@ -4,9 +4,17 @@ namespace Mauricio\Movies\Model\ResourceModel\Favorite\Grid;
 
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Api\Search\AggregationInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
+use Magento\Framework\Data\Collection\EntityFactoryInterface;
+use Magento\Framework\Event\ManagerInterface;
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Magento\Store\Model\StoreManagerInterface;
 use Mauricio\Movies\Model\ResourceModel\Favorite\Collection as FavoriteCollection;
+use Psr\Log\LoggerInterface;
 
-class Collection extends FavoriteCollection implements SearchResultInterface {
+class Collection extends FavoriteCollection implements SearchResultInterface
+{
 
     /**
      * @var AggregationInterface
@@ -15,32 +23,32 @@ class Collection extends FavoriteCollection implements SearchResultInterface {
 
     /**
      * Collection constructor.
-     * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
-     * @param \Magento\Framework\Event\ManagerInterface $eventManager
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param EntityFactoryInterface $entityFactory
+     * @param LoggerInterface $logger
+     * @param FetchStrategyInterface $fetchStrategy
+     * @param ManagerInterface $eventManager
+     * @param StoreManagerInterface $storeManager
      * @param $mainTable
      * @param $eventPrefix
      * @param $eventObject
      * @param $resourceModel
      * @param string $model
      * @param null $connection
-     * @param \Magento\Framework\Model\ResourceModel\Db\AbstractDb|null $resource
+     * @param AbstractDb|null $resource
      */
     public function __construct(
-        \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
-        \Magento\Framework\Event\ManagerInterface $eventManager,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        EntityFactoryInterface $entityFactory,
+        LoggerInterface $logger,
+        FetchStrategyInterface $fetchStrategy,
+        ManagerInterface $eventManager,
+        StoreManagerInterface $storeManager,
         $mainTable,
         $eventPrefix,
         $eventObject,
         $resourceModel,
         $model = 'Magento\Framework\View\Element\UiComponent\DataProvider\Document',
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        AbstractDb $resource = null
     ) {
         parent::__construct(
             $entityFactory,
@@ -65,8 +73,7 @@ class Collection extends FavoriteCollection implements SearchResultInterface {
     }
 
     /**
-     * @param AggregationInterface $aggregations
-     * @return $this
+     * @param $aggregations
      */
     public function setAggregations($aggregations)
     {
@@ -82,10 +89,10 @@ class Collection extends FavoriteCollection implements SearchResultInterface {
     }
 
     /**
-     * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
-     * @return $this|Collection
+     * @param SearchCriteriaInterface|null $searchCriteria
+     * @return $this
      */
-    public function setSearchCriteria(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
@@ -99,8 +106,8 @@ class Collection extends FavoriteCollection implements SearchResultInterface {
     }
 
     /**
-     * @param int $totalCount
-     * @return $this|Collection
+     * @param $totalCount
+     * @return $this
      */
     public function setTotalCount($totalCount)
     {
@@ -109,7 +116,7 @@ class Collection extends FavoriteCollection implements SearchResultInterface {
 
     /**
      * @param array|null $items
-     * @return $this|Collection
+     * @return $this
      */
     public function setItems(array $items = null)
     {
