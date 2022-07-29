@@ -42,4 +42,5 @@
 ![_Add Favorite button_ on the product page](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/05_view_product.png?raw=true) <br /> 
 
 #### _Top 10 Favorite Movies_ page  <br />
-![_Top 10 Favorite Movies_ page](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/06_admin_top_10_favorite.png?raw=true) <br /> 
+![_Top 10 Favorite Movies_ page](https://github.com/xeruba/mauricio-movies/blob/main/readme_images/06_admin_top_10_favorite.png?raw=true) <br />
+ 
